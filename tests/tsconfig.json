@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"checkJs": true,
+		"allowJs": true,
+		"noEmit": true,
+		"target": "ES2019",
+		"moduleResolution": "Node",
+		"lib": ["es6"]
+	},
+	"include": [
+		"./**/*",
+		"../node_modules/types-mediawiki/index.d.ts",
+		"../node_modules/expect-playwright/global.d.ts",
+		"../node_modules/jest-playwright-preset/types/global.d.ts"
+	]
+}

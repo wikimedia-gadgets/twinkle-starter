@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		/* Visit https://aka.ms/tsconfig.json to read more about this file */
+		"target": "ES5",
+		"module": "none",
+		"lib": [
+			"dom",
+			"es5",
+			"es2015.collection"
+			// Only Map and Set from this are supported in IE 11.
+		],
+		"outDir": "./build",
+		"sourceMap": true,
+		"moduleResolution": "node",
+
+		// With importHelpers=true, TS helper functions are prevented from
+		// being duplicated for every source file
+		"importHelpers": true,
+		"esModuleInterop": true,
+		"newLine": "lf"
+	},
+	"include": [
+		"src/**/*",
+		"./node_modules/types-mediawiki",
+		"../twinkle-core/morebits/index.d.ts"
+	],
+	"compileOnSave": true
+}

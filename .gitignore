@@ -1,0 +1,31 @@
+.twinklerc
+/.settings
+/.project
+jsl.conf
+stash*.txt
+stash*.diff
+*.jsX
+*.js.map
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Node
+node_modules/
+npm-debug.log*
+
+#Generated files
+docs/
+build/
