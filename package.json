@@ -67,6 +67,6 @@
 		}
 	},
 	"lint-staged": {
-		"*.ts(x)?": "npm run format"
+		"*.ts(x)?": "prettier --write"
 	}
 }
