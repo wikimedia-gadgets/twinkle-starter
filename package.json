@@ -22,7 +22,7 @@
 		"url": "git+https://github.com/wikimedia-gadgets/twinkle-starter.git"
 	},
 	"author": "Siddharth VP",
-	"license": "ISC",
+	"license": "CC-BY-SA-3.0",
 	"bugs": {
 		"url": "https://github.com/wikimedia-gadgets/twinkle-starter/issues"
 	},
