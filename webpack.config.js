@@ -23,7 +23,7 @@ module.exports = {
 		extensions: [ '.ts' ],
 	},
 	output: {
-		filename: 'bundle.js',
+		filename: 'twinkle.js',
 		path: path.resolve(__dirname, 'build')
 	},
 	devServer: {
