@@ -5,7 +5,7 @@ name: template_initialization
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   template_initialization:
