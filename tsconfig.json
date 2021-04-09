@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		/* Visit https://aka.ms/tsconfig.json to read more about this file */
 		"target": "ES5",
-		"module": "none",
+		"module": "ES2020",
 		"lib": [
 			"dom",
 			"es5",
@@ -12,6 +12,7 @@
 		"outDir": "./build",
 		"sourceMap": true,
 		"moduleResolution": "node",
+		"resolveJsonModule": true,
 
 		// With importHelpers=true, TS helper functions are prevented from
 		// being duplicated for every source file

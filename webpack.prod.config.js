@@ -1,5 +1,6 @@
 const path = require('path');
-// const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const webpack = require('webpack');
+const args = require('minimist')(process.argv.slice(2));
 
 module.exports = {
 	mode: 'production',
@@ -10,22 +11,25 @@ module.exports = {
 			{
 				test: /\.ts$/,
 				loader: 'ts-loader',
-				exclude: /node_modules/, // XXX: won't this exclude twinkle-core ?
 				options: {
-					// disable type checker - we will use it in fork plugin
-					transpileOnly: true
-				}
+					transpileOnly: true,
+				},
 			},
 		],
 	},
 	resolve: {
-		extensions: [ '.ts' ],
+		extensions: ['.ts'],
 	},
 	plugins: [
-		// new ForkTsCheckerWebpackPlugin()
+		// specify --excludeEnglishMessages to exclude English messages (about 20 kb) in build
+		// Do this ONLY if you are sure all messages have been translated into your local language,
+		// otherwise users will see message keys
+		new webpack.DefinePlugin({
+			INCLUDE_ENGLISH_MESSAGES: Boolean(args.excludeEnglishMessages)
+		})
 	],
 	output: {
-		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'build')
-	}
+		filename: 'twinkle.js',
+		path: path.resolve(__dirname, 'build'),
+	},
 };
