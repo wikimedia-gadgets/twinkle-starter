@@ -6,12 +6,6 @@
 	width: 3.24em;
 }
 
-/* Used in unlink */
-form.quickform span.quickformDescription code {
-	font-family: monospace;
-	font-style: normal;
-}
-
 /* The additional box on user skin.js and twinklepreferences.js pages */
 #twinkle-config-headerbox {
 	border: 1px #f60 solid;

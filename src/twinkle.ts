@@ -1,37 +1,42 @@
-import { Twinkle } from 'twinkle-core';
+import { Twinkle, init, loadAdditionalMediaWikiMessages, SiteConfig } from 'twinkle-core';
+import messages from './messages.json';
+import mwMessageList from './mw-messages';
 
-// Make jQuery Deferred exceptions hit the source map during debugging
-// XXX: there has to be a better way to do this ...
-// @ts-ignore
-if (typeof __webpack_exports__ !== 'undefined') {
-	jQuery.Deferred.exceptionHook = function (err) {
-		throw err;
-	};
-}
 
 // Check if account is experienced enough to use Twinkle
 if (!Morebits.userIsInGroup('autoconfirmed') && !Morebits.userIsInGroup('confirmed')) {
 	throw new Error('Twinkle: forbidden!');
 }
 
-Twinkle.userAgent = 'Twinkle ([[w:en:WP:TW]])';
-Twinkle.changeTags = 'twinkle';
-Twinkle.summaryAd = ' ([[WP:TW|TW]])';
+Twinkle.userAgent = `Twinkle (${mw.config.get('wgWikiID')})`;
 
-Twinkle.init();
+Twinkle.summaryAd = ' ([[Project:TW|TW]])';
+
+Twinkle.changeTags = [];
+
+Twinkle.messageOverrides = messages;
+
+Twinkle.preModuleInitHooks = [
+	() => loadAdditionalMediaWikiMessages(mwMessageList)
+];
 
 Twinkle.registeredModules = [
 	// Add modules here
 ];
 
-for (let module of Twinkle.registeredModules) {
-	Twinkle.addInitCallback(() => new module(), module.moduleName);
-}
+/**
+ * Adjust the following configurations if necessary
+ * Check the documentation for each property on toolforge
+ */
 
-// allow global access
-declare global {
-	interface Window {
-		Twinkle: typeof Twinkle;
-	}
-}
-window.Twinkle = Twinkle;
+SiteConfig.permalinkSpecialPageName = 'Special:PermanentLink';
+
+SiteConfig.botUsernameRegex = /bot\b/i;
+
+SiteConfig.flaggedRevsNamespaces = [];
+
+SiteConfig.redirectTagAliases = ['#REDIRECT'];
+
+
+// Go!
+init();

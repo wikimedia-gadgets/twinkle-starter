@@ -30,9 +30,7 @@ export async function setupMWBrowser(page) {
 
 declare global {
 	namespace jest {
-		interface Matchers<R, T = {}> extends Chai.LanguageChains {
-
-		}
+		interface Matchers<R, T = {}> extends Chai.LanguageChains {}
 	}
 }
 
