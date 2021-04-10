@@ -85,7 +85,7 @@ To generate a production build, run `grunt build`. This build minimises the code
 #### Deploy as a gadget
 Edit MediaWiki:Gadgets-definition to add the Twinkle gadget:
 ```
-*Twinkle[ResourceLoader|dependencies=ext.gadget.morebits,ext.gadget.select2,mediawiki.api|type=general|peers=Twinkle-pagestyles]|Twinkle.js|Twinkle.css
+*Twinkle[ResourceLoader|dependencies=ext.gadget.morebits,ext.gadget.select2,mediawiki.libs.pluralruleparser,es6-promise,mediawiki.api|type=general|peers=Twinkle-pagestyles]|Twinkle.js|Twinkle.css
 *morebits[ResourceLoader|dependencies=mediawiki.user,mediawiki.util,mediawiki.Title,jquery.ui|hidden]|morebits.js|morebits.css
 *Twinkle-pagestyles[hidden|skins=vector]|Twinkle-pagestyles.css
 *select2[ResourceLoader|hidden]|select2.min.js|select2.min.css
@@ -95,9 +95,9 @@ Copy the [MediaWiki:Gadget-select2.min.js](https://en.wikipedia.org/wiki/MediaWi
 
 You can deploy manually by copying all files in the build directory (created by running `grunt build`) to the wiki.
 
-You can also use the [deploy.js script](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/deploy.js) to push to the wiki. 
-- Create a bot password or set up OAuth credentials. Ensure you provide the sufficient rights.
-- Optional: Create a `credentials.json` file with your login information. If this is not done, the deploy script will prompt you for the username and password.
+Or to make it simpler, you can also use the [deploy.js script](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/deploy.js): 
+- Create a [bot password](https://www.mediawiki.org/wiki/Manual:Bot_passwords) or set up [OAuth credentials (owner-only)](https://www.mediawiki.org/wiki/OAuth/Owner-only_consumers). Ensure you provide the sufficient rights.
+- Optional: Create a `credentials.json` file with your login information in the appropriate format. If this is not done, the deploy script will prompt you for the username and password.
 - Adjust the `deployTargets` field in deploy.js script as appropriate. Run it.
 
 #### Deploy as a user script
@@ -110,7 +110,10 @@ Copy [MediaWiki:Gadget-select2.min.js](https://en.wikipedia.org/wiki/MediaWiki:G
 
 Create a central loader (say [[User:Example/twinkle.js]]):
 ```js
-mw.loader.using(['mediawiki.user', 'mediawiki.util', 'mediawiki.Title', 'mediawiki.api']).then(function () {
+mw.loader.using([
+	'mediawiki.user', 'mediawiki.util', 'mediawiki.Title', 'mediawiki.api', 
+    'mediawiki.libs.pluralruleparser', 'es6-promise'
+]).then(function () {
 	function load(pageName, css) {
 		return mw.loader.getScript(
 			'/w/index.php?title=User:Example' + pageName + '&action=raw&ctype=text/' + css ? 'css' : 'javascript', 
@@ -134,7 +137,7 @@ In theory, the fetch of i18n messages and twinkleconfig could be parallelized wi
 
 ## Development customisation
 
-Twinkle-start is a rather opinionated toolkit so that you don't have to configure any development tooling, but you always tweak them. Examples: 
+Twinkle-starter is a rather opinionated toolkit so that you don't have to configure any development tooling, but you always tweak them. Examples: 
 
 ### Don't use TypeScript
 <details>
@@ -156,7 +159,7 @@ Modify `eslintrc.json` file to remove mentions of typescript parser and plugin.
 
 <details>
     <summary>Click to expand</summary>
-[Prettier](https://prettier.io) is opinionated, it is OK to want to break free from it.
+<a href="https://prettier.io">Prettier</a> is quite opinionated, it is OK to want to break free from it.
 
 Run the command:
 ```bash

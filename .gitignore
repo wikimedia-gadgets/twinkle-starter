@@ -6,6 +6,7 @@ stash*.txt
 stash*.diff
 *.jsX
 *.js.map
+credentials.json
 
 # Windows
 Thumbs.db
@@ -27,5 +28,4 @@ node_modules/
 npm-debug.log*
 
 #Generated files
-docs/
 build/

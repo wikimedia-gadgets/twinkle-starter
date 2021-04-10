@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 const args = require('minimist')(process.argv.slice(2));
 
 module.exports = {
@@ -25,11 +26,21 @@ module.exports = {
 		// Do this ONLY if you are sure all messages have been translated into your local language,
 		// otherwise users will see message keys
 		new webpack.DefinePlugin({
-			INCLUDE_ENGLISH_MESSAGES: Boolean(args.excludeEnglishMessages)
+			EXCLUDE_ENGLISH_MESSAGES: Boolean(args.excludeEnglishMessages)
 		})
 	],
 	output: {
 		filename: 'twinkle.js',
 		path: path.resolve(__dirname, 'build'),
+	},
+	optimization: {
+		minimizer: [
+			new TerserPlugin({
+				extractComments: /@preserve/,
+			}),
+		],
+	},
+	performance: {
+		hints: false,
 	},
 };
