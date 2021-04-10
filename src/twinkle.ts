@@ -26,7 +26,8 @@ Twinkle.registeredModules = [
 
 /**
  * Adjust the following configurations if necessary
- * Check the documentation for each property on toolforge
+ * Check the documentation for each property here:
+ * https://twinkle.toolforge.org/core-docs/modules/siteconfig.html
  */
 
 SiteConfig.permalinkSpecialPageName = 'Special:PermanentLink';
