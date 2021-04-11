@@ -1,6 +1,6 @@
 const Webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server/lib/Server');
-const webpackConfig = require('./webpack.config');
+const webpackConfig = require('../webpack.config');
 
 const compiler = Webpack(webpackConfig);
 const devServerOptions = Object.assign({}, webpackConfig.devServer);
@@ -12,19 +12,15 @@ server.listen(5500, '127.0.0.1', () => {
 
 // Disable the deployed gadget version when we begin our testing,
 // enable it back again when we stop testing.
-// You need to create a credentials.json file (it will be git-ignored)
-// with content:
-/*
-Using a bot password (set one up using [[Special:BotPasswords]]:
- 	{ "apiUrl": "", "silent": true, "username": "", "password": "" }
-OR using OAuth:
-    { "apiUrl": "", "OAuthCredentials": {"consumerToken": "", "consumerSecret": "", "accessToken": "", "accessSecret": "" } }
- */
+// You need to create a credentials.json file in this directory
+// (it will be git-ignored) with the "apiUrl", "username" and "password" fields.
+// See README file in this directory for more details.
 (async () => {
 	const { mwn } = require('mwn');
 	let user;
 	try {
 		user = await mwn.init('./credentials.json');
+		user.setOptions({ silent: true });
 	} catch (e) {
 		if (e instanceof mwn.Error) {
 			console.log(`[mwn]: can't disable twinkle as gadget: login failure: ${e}`);

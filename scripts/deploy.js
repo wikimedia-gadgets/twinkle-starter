@@ -2,7 +2,7 @@
 // (MIT Licence)
 /**
  * This script is used to deploy files to the wiki.
- * You must have interface-admin rights to use this.
+ * You must have interface-admin rights to deploy as gadget.
  *
  * ----------------------------------------------------------------------------
  *    Set up:
@@ -11,9 +11,8 @@
  *    sufficient permissions.
  * 2) Create a JSON file to store the username and password. This should be
  *    a plain JSON object with keys "username" and "password", see README
- *    file for an example. Save it here in the "bin" directory with file
+ *    file for an example. Save it here in the "scripts" directory with file
  *    name "credentials.json".
- *    IMPORTANT: Never commit this file to the repository!
  *
  * ---------------------------------------------------------------------------
  *    Pre-deployment checklist:
@@ -45,29 +44,23 @@ const prompts = require('prompts');
 const chalk = require('chalk');
 const minimist = require('minimist');
 
-const args = minimist(process.argv.slice(2));
-console.log('Entered args', args);
-
-async function prompt(message, type = 'text', initial = '') {
-	let name = String(Math.random());
-	return (await prompts({ type, name, message, initial }))[name];
-}
+// Adjust target file names if necessary
+// Remove twinkle-pagestyles.css if deploying as user script
+const deployTargets = [
+	{ file: 'build/twinkle.js', target: 'MediaWiki:Gadget-TwinkleV3.js' },
+	{ file: 'build/twinkle.css', target: 'MediaWiki:Gadget-TwinkleV3.css' },
+	{ file: 'build/morebits.js', target: 'MediaWiki:Gadget-morebitsV3.js' },
+	{
+		file: 'build/morebits.css',
+		target: 'MediaWiki:Gadget-morebitsV3.css',
+	},
+	{
+		file: 'build/twinkle-pagestyles.css',
+		target: 'MediaWiki:Gadget-Twinkle-pagestylesV3.css',
+	},
+];
 
 class Deploy {
-	deployTargets = [
-		{ file: 'build/twinkle.js', target: 'MediaWiki:Gadget-TwinkleV3.js' },
-		{ file: 'build/twinkle.css', target: 'MediaWiki:Gadget-TwinkleV3.css' },
-		{
-			file: 'build/twinkle-pagestyles.css',
-			target: 'MediaWiki:Gadget-Twinkle-pagestylesV3.css',
-		},
-		{ file: 'build/morebits.js', target: 'MediaWiki:Gadget-morebitsV3.js' },
-		{
-			file: 'build/morebits.css',
-			target: 'MediaWiki:Gadget-morebitsV3.css',
-		},
-	];
-
 	async deploy() {
 		this.loadConfig();
 		await this.getApi();
@@ -125,7 +118,7 @@ class Deploy {
 
 		log('yellow', '--- starting deployment ---');
 
-		for await (let { file, target } of this.deployTargets) {
+		for await (let { file, target } of deployTargets) {
 			let fileText = (await fs.readFile(__dirname + '/' + file)).toString();
 			try {
 				const response = await this.api.save(target, fileText, this.editSummary);
@@ -143,6 +136,11 @@ class Deploy {
 	}
 }
 
+async function prompt(message, type = 'text', initial = '') {
+	let name = String(Math.random());
+	return (await prompts({ type, name, message, initial }))[name];
+}
+
 function logError(error) {
 	error = error || {};
 	console.log((error.info || 'Unknown error') + '\n', error.response || error);
@@ -151,5 +149,8 @@ function logError(error) {
 function log(color, ...args) {
 	console.log(chalk[color](...args));
 }
+
+const args = minimist(process.argv.slice(2));
+console.log('Entered args', args);
 
 new Deploy().deploy();

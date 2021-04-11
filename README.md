@@ -99,9 +99,9 @@ Copy the [MediaWiki:Gadget-select2.min.js](https://en.wikipedia.org/wiki/MediaWi
 
 You can deploy manually by copying all files in the build directory (created by running `grunt build`) to the wiki.
 
-Or to make it simpler, you can also use the [deploy.js script](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/deploy.js): 
+Or to make it simpler, you can also use the [deploy.js script](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/scripts/deploy.js): 
 - Create a [bot password](https://www.mediawiki.org/wiki/Manual:Bot_passwords) or set up [OAuth credentials (owner-only)](https://www.mediawiki.org/wiki/OAuth/Owner-only_consumers). Ensure you provide the sufficient rights.
-- Optional: Create a `credentials.json` file with your login information in the appropriate format. If this is not done, the deploy script will prompt you for the username and password.
+- Optional: Create a `credentials.json` file with [your login information in the appropriate format](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/scripts/README.md). If this is not done, the deploy script will prompt you for the username and password.
 - Adjust the `deployTargets` field in deploy.js script as appropriate. Run it.
 
 #### Deploy as a user script
