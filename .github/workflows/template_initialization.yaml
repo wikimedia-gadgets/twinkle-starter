@@ -16,7 +16,6 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           mv README.template.md README.md
-          mv .github/node-ci.yml .github/workflows/node-ci.yml
 
       - name: Replace tokens in README.MD and package.json
         uses: cschleiden/replace-tokens@v1
