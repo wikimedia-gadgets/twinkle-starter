@@ -45,6 +45,7 @@ const chalk = require('chalk');
 const minimist = require('minimist');
 
 // Adjust target file names if necessary
+// All file paths are with respect to repository root
 // Remove twinkle-pagestyles.css if deploying as user script
 const deployTargets = [
 	{ file: 'build/twinkle.js', target: 'MediaWiki:Gadget-TwinkleV3.js' },
@@ -62,8 +63,8 @@ const deployTargets = [
 
 class Deploy {
 	async deploy() {
-		this.loadConfig();
-		await this.getApi();
+		const config = this.loadConfig();
+		await this.getApi(config);
 		await this.login();
 		await this.makeEditSummary();
 		await this.savePages();
@@ -71,15 +72,14 @@ class Deploy {
 
 	loadConfig() {
 		try {
-			// TODO: strip comments first?
 			return require(__dirname + '/credentials.json');
 		} catch (e) {
+			log('red', 'No credentials.json file found.');
 			return {};
 		}
 	}
 
-	async getApi() {
-		const config = this.loadConfig();
+	async getApi(config) {
 		this.api = new mwn(config);
 		try {
 			this.api.initOAuth();
@@ -89,16 +89,24 @@ class Deploy {
 				config.username = await prompt('> Enter username');
 			}
 			if (!config.password) {
-				config.password = await prompt('> Enter password', 'password');
+				config.password = await prompt('> Enter bot password', 'password');
+			}
+			if (args.testwiki) {
+				config.apiUrl = `https://test.wikipedia.org/w/api.php`;
+			} else {
+				if (!config.apiUrl) {
+					const site = await prompt('> Enter sitename (eg. en.wikipedia.org)');
+					config.apiUrl = `https://${site}/w/api.php`;
+				}
 			}
 			this.api.setOptions(config);
 		}
 	}
 
 	async login() {
-		this.siteCode = args.enwiki ? 'en' : args.testwiki ? 'test' : null;
-		if (!this.siteCode) throw new Error('use either --enwiki or --testwiki');
-		this.api.setApiUrl(`https://${this.siteCode}.wikipedia.org/w/api.php`);
+		this.siteName = this.api.options.apiUrl.replace(/^https:\/\//, '')
+		.replace(/\/.*/, '');
+		log('yellow', '--- Logging in ...');
 		if (this.usingOAuth) {
 			await this.api.getTokensAndSiteInfo();
 		} else {
@@ -113,22 +121,26 @@ class Deploy {
 		console.log(`Edit summary is: "${this.editSummary}"`);
 	}
 
+	async readFile(filepath) {
+		return (await fs.readFile(__dirname + '/../' + filepath)).toString();
+	}
+
 	async savePages() {
-		await prompt('> Press [Enter] to start deploying or [ctrl + C] to cancel');
+		await prompt(`> Press [Enter] to start deploying to ${this.siteName} or [ctrl + C] to cancel`);
 
 		log('yellow', '--- starting deployment ---');
 
 		for await (let { file, target } of deployTargets) {
-			let fileText = (await fs.readFile(__dirname + '/' + file)).toString();
+			let fileText = await this.readFile(file);
 			try {
 				const response = await this.api.save(target, fileText, this.editSummary);
 				if (response && response.nochange) {
-					log('yellow', `━ No change saving ${file} to ${this.siteCode}:${target}`);
+					log('yellow', `━ No change saving ${file} to ${target} on ${this.siteName}`);
 				} else {
-					log('green', `✔ Successfully saved ${file} to ${this.siteCode}:${target}`);
+					log('green', `✔ Successfully saved ${file} to ${target} on ${this.siteName}`);
 				}
 			} catch (error) {
-				log('red', `✘ Failed to save ${file} to ${this.siteCode}:${target}`);
+				log('red', `✘ Failed to save ${file} to ${target} on ${this.siteName}`);
 				logError(error);
 			}
 		}
@@ -151,6 +163,4 @@ function log(color, ...args) {
 }
 
 const args = minimist(process.argv.slice(2));
-console.log('Entered args', args);
-
 new Deploy().deploy();

@@ -1,5 +1,7 @@
 This directory contains scripts used for *developing* twinkle.
 
+----
+
 Format for credentials.json file:
 
 Set up a bot password via [[Special:BotPasswords]]
@@ -26,6 +28,6 @@ Set up an owner-only OAuth credential via [meta:Special:OAuthConsumerRegistratio
 }
 ```
 
-The `apiUrl` field is only applicable for `server.js`. Using OAuth will make `server.js` slightly faster in disabling the twinkle gadget version.   
+Using OAuth will make `server.js` slightly faster in disabling the twinkle gadget version.   
 
 IMPORTANT: Never commit this file to the repository!
