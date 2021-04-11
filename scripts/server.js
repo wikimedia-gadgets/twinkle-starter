@@ -19,7 +19,7 @@ server.listen(5500, '127.0.0.1', () => {
 	const { mwn } = require('mwn');
 	let user;
 	try {
-		user = await mwn.init('./credentials.json');
+		user = await mwn.init(__dirname + '/credentials.json');
 		user.setOptions({ silent: true });
 	} catch (e) {
 		if (e instanceof mwn.Error) {

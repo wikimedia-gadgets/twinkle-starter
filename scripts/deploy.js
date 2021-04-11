@@ -72,7 +72,7 @@ class Deploy {
 	loadConfig() {
 		try {
 			// TODO: strip comments first?
-			return require('./credentials.json');
+			return require(__dirname + '/credentials.json');
 		} catch (e) {
 			return {};
 		}
