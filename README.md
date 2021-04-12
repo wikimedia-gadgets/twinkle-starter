@@ -3,7 +3,7 @@
 
 This is a template repository to create a Twinkle customisation for a new wiki. 
 
-To use this template, click on the ![Use this template](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) button near the top. The [template initialisation workflow](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/.github/workflows/template_initialization.yaml) will shortly create a new commit in your repository replacing the placeholders in the package.json file.
+To use this template, click on the ![Use this template](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) button near the top. The [template initialisation workflow](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/.github/workflows/template_initialization.yaml) will shortly create a new commit in your repository replacing the placeholders in the package.json file. If you don't wish to use GitHub, please see [the note below](#user-content-use-a-source-code-host-other-than-github).
 
 ### Customising Twinkle - Getting Started
 You need to have the following installed on your system: (i) Git, (ii) Node.js v13 or above, (iii) npm.
@@ -70,9 +70,16 @@ class MyCustomModule extends TwinkleModule {
 
 ## Development
 
+Firstly, you'll want to make sure your editor is properly configured to work with TypeScript. For example, you may need to install a plugin (such as atom-typescript if you use atom editor), in order to fully take advantage of TypeScript. If you use VS Code, TypeScript support is built-in, so no extensions are required.
+
 Commands:
 - `npm start` - this creates a quick build of the project which you can test by loading `mw.loader.load('http://localhost:5500/twinkle.js');` from your on-wiki common.js page (or from the browser console). 
 - `grunt build` - this creates a minified single-file build that you copy over to the wiki (see Deployment below).
+
+### Twinkle-core message translations
+Twinkle-core uses Translatewiki.net for message translations. Check if its messages are available in your wiki's language (https://github.com/wikimedia-gadgets/twinkle-core/tree/master/i18n). For messages that aren't available:
+* Consider contributing the translations directly to translatewiki.net – these messages will be used by all twinkle installations in that language 
+* If you can't contribute to translatewiki.net or if there are any messages that you want to be project-specific rather than language-specific, then define them in the `src/messages.json` file. Any messages in this file will override messages coming from translatewiki.net.
 
 ### Browser compatibility
 Twinkle-core is compatible with all browsers for which MediaWiki provides JavaScript support, including IE 11. However, in your own customisations, you can choose to [avoid IE11 support](https://www.mediawiki.org/wiki/Compatibility/IE11) unless you have good reason to support IE. Do check MDN docs or [caniuse.com](https://caniuse.com/) before using modern browser APIs to ensure that they're supported in most browsers.
@@ -120,7 +127,7 @@ mw.loader.using([
 ]).then(function () {
 	function load(pageName, css) {
 		return mw.loader.getScript(
-			'/w/index.php?title=User:Example' + pageName + '&action=raw&ctype=text/' + css ? 'css' : 'javascript', 
+			'/w/index.php?title=User:Example' + pageName + '&action=raw&ctype=text/' + (css ? 'css' : 'javascript'), 
             css ? 'text/css' : null  
         );
     }
@@ -167,6 +174,8 @@ Run `npm i -D @babel/core @babel/preset-env babel-loader`
 Modify `webpack.config.js` and `webpack.prod.config.json` to use <a href="https://www.npmjs.com/package/babel-loader">babel-loader</a> instead of ts-loader.
 
 Modify `eslintrc.json` file to remove mentions of typescript parser and plugin.
+
+Delete the file `tsconfig.json`
 </details>
 
 ### Remove prettier
@@ -183,6 +192,17 @@ Remove the "husky" and "lint-staged" fields in `package.json`.
 
 </details>
 
+### Remove eslint
+
+<details>
+    <summary>Click to expand</summary>
+While eslint is ubiquitous in JavaScript projects, it may not be necessary in TypeScript projects that also use Prettier. TypeScript ensures syntax sanity and Prettier ensures formatting sanity. Both these tools do their respective jobs better than eslint does either.
+
+Run `npm uninstall eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser`
+
+Delete any `.eslintrc.json` file(s)
+</details>
+
 ### Use a source code host other than GitHub
 <details>
   <summary>Click to expand</summary>
@@ -190,6 +210,11 @@ Remove the "husky" and "lint-staged" fields in `package.json`.
 Temporarily create a GitHub repository for the template initialisation workflow. When it completes, clone the repo, after which you can delete the GitHub repo and push it to the source code hosting site of your preference.
 
 Delete the `.github` directory - everything inside it works only on GitHub. You'll have to find your own means for any CI workflows you may want to run.
+
+If you want to host your code on Gerrit – file a repository request at <a href="https://www.mediawiki.org/wiki/Gerrit/New_repositories/Requests">mw:Gerrit/New repositories/Requests</a>
+
+Do check regularly for new twinkle-core releases, since dependabot wouldn't be able to automatically notify you outside GitHub.
+
 </details>
 
 ----
