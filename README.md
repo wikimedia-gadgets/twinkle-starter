@@ -87,7 +87,7 @@ Twinkle-core is compatible with all browsers for which MediaWiki provides JavaSc
 ### Writing automated tests
 Twinkle-starter comes with a test suite which uses [Jest](https://www.npmjs.com/package/jest), [mock-mediawiki](https://www.npmjs.com/package/mock-mediawiki) and [playwright](https://www.npmjs.com/package/playwright). Unit tests for utility functions can be written with mock-mediawiki for mocking any `mw.*` functions if necessary. 
 
-For writing integration tests, you can spin up a MediaWiki instance using Docker (`npm run test:integration:setup`), use playwright for browser automation, and mwn for setting up test fixtures via the API and checking results. However, note that writing integration tests is quite time-consuming and is likely overkill, unless you plan to make frequent changes.
+For writing integration tests, you can spin up a MediaWiki instance using Docker, use playwright for browser automation, and mwn for setting up test fixtures via the API and checking results. See [integration/README.md](https://github.com/wikimedia-gadgets/twinkle-starter/tree/master/tests/integration/README.md) for details. However, note that writing integration tests is quite time-consuming and is likely overkill, unless you plan to make frequent changes. 
 
 ## Deployment
 
