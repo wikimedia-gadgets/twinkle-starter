@@ -60,7 +60,7 @@ export async function loadTwinkle() {
 			(await readFile(twinkleCore + 'morebits/morebits.css')) + '\n' + (await readFile(repoRoot + 'src/twinkle.css')),
 	});
 	await page.evaluate(await readFile(twinkleCore + 'morebits/morebits.js'));
-	await page.evaluate(await readFile(repoRoot + 'build/bundle.js'));
+	await page.evaluate(await readFile(repoRoot + 'build/twinkle.js'));
 }
 
 export class TwinkleModule {
