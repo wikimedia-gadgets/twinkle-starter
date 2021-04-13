@@ -91,21 +91,23 @@ class Deploy {
 			if (!config.password) {
 				config.password = await prompt('> Enter bot password', 'password');
 			}
-			if (args.testwiki) {
-				config.apiUrl = `https://test.wikipedia.org/w/api.php`;
-			} else {
-				if (!config.apiUrl) {
-					const site = await prompt('> Enter sitename (eg. en.wikipedia.org)');
-					config.apiUrl = `https://${site}/w/api.php`;
-				}
-			}
-			this.api.setOptions(config);
 		}
+		if (args.testwiki) {
+			config.apiUrl = `https://test.wikipedia.org/w/api.php`;
+		} else {
+			if (!config.apiUrl) {
+				if (Object.keys(config).length) {
+					log('yellow', 'Tip: you can avoid this prompt by setting the apiUrl as well in credentials.json');
+				}
+				const site = await prompt('> Enter sitename (eg. en.wikipedia.org)');
+				config.apiUrl = `https://${site}/w/api.php`;
+			}
+		}
+		this.api.setOptions(config);
 	}
 
 	async login() {
-		this.siteName = this.api.options.apiUrl.replace(/^https:\/\//, '')
-		.replace(/\/.*/, '');
+		this.siteName = this.api.options.apiUrl.replace(/^https:\/\//, '').replace(/\/.*/, '');
 		log('yellow', '--- Logging in ...');
 		if (this.usingOAuth) {
 			await this.api.getTokensAndSiteInfo();
@@ -114,6 +116,7 @@ class Deploy {
 		}
 	}
 
+	// TODO: read last saved commit hash and use that to construct a meaningful summary
 	async makeEditSummary() {
 		const sha = execSync('git rev-parse --short HEAD').toString('utf8').trim();
 		const message = await prompt('> Edit summary message (optional): ');
