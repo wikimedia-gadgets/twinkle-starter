@@ -5,6 +5,8 @@ This is a template repository to create a Twinkle customisation for a new wiki.
 
 To use this template, click on the ![Use this template](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) button near the top. The [template initialisation workflow](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/.github/workflows/template_initialization.yaml) will shortly create a new commit in your repository replacing the placeholders in the package.json file. If you don't wish to use GitHub, please see [the note below](#user-content-use-a-source-code-host-other-than-github).
 
+Add the [topic "wikimedia-twinkle"](https://github.com/topics/wikimedia-twinkle) to your GitHub repository so that it is easy for others to locate all twinkle repos.
+
 ### Customising Twinkle - Getting Started
 You need to have the following installed on your system: (i) Git, (ii) Node.js v13 or above, (iii) npm.
 
