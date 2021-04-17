@@ -13,7 +13,7 @@
 		"test": "env DEBUG=true webpack && jest -i",
 		"test:unit": "webpack && jest --selectProjects unit",
 		"test:integration": "webpack && jest --selectProjects integration",
-		"test:integration:setup": "cd tests/integration/docker && bash main.sh",
+		"test:integration:setup": "npm i --no-save playwright@1.9.1 && cd tests/integration/docker && bash main.sh",
 		"test:integration:teardown": "cd tests/integration/docker && docker-compose down"
 	},
 	"repository": {
@@ -23,20 +23,24 @@
 	"author": "#{USER_OR_ORG}#",
 	"license": "CC-BY-SA-3.0",
 	"homepage": "https://github.com/#{USER_OR_ORG}#/#{REPO_NAME}#",
+	"sideEffects": [
+		"src/globals.ts"
+	],
 	"dependencies": {
-		"tslib": "^1.14.1",
+		"tslib": "2.0.3",
 		"twinkle-core": "^3.0.2-beta"
 	},
 	"devDependencies": {
-		"@types/chai": "^4.2.15",
+		"@types/chai": "^4.2.16",
 		"@types/chai-as-promised": "^7.1.3",
-		"@types/jest": "^26.0.20",
-		"@typescript-eslint/eslint-plugin": "^4.11.1",
-		"@typescript-eslint/parser": "^4.11.1",
+		"@types/jest": "^26.0.22",
+		"@typescript-eslint/eslint-plugin": "^4.22.0",
+		"@typescript-eslint/parser": "^4.22.0",
 		"chai": "^4.3.4",
 		"chai-as-promised": "^7.1.1",
 		"chalk": "^4.1.0",
-		"eslint": "^7.15.0",
+		"diff": "^5.0.0",
+		"eslint": "^7.24.0",
 		"grunt": "^1.3.0",
 		"grunt-contrib-clean": "^2.0.0",
 		"grunt-contrib-concat": "^1.0.1",
@@ -45,19 +49,19 @@
 		"grunt-webpack": "^4.0.2",
 		"husky": "^4.3.7",
 		"jest": "^26.6.3",
-		"jest-playwright-preset": "^1.4.7",
+		"jest-playwright-preset": "^1.5.1",
 		"lint-staged": "^10.5.3",
 		"minimist": "^1.2.5",
 		"mock-mediawiki": "^1.0.1",
-		"mwn": "^0.10.3",
+		"mwn": "^0.10.4",
 		"prettier": "^2.2.1",
-		"prompts": "^2.4.0",
-		"ts-jest": "^26.5.2",
-		"ts-loader": "^8.0.13",
-		"typescript": "^4.1.2",
-		"webpack": "^5.11.1",
-		"webpack-cli": "^4.3.1",
-		"webpack-dev-server": "^3.11.1"
+		"prompts": "^2.4.1",
+		"ts-jest": "^26.5.5",
+		"ts-loader": "8.0.13",
+		"typescript": "4.1.2",
+		"webpack": "^5.33.2",
+		"webpack-cli": "^4.6.0",
+		"webpack-dev-server": "^3.11.2"
 	},
 	"husky": {
 		"hooks": {
