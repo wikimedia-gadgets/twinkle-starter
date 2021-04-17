@@ -184,6 +184,14 @@ Modify `eslintrc.json` file to remove mentions of typescript parser and plugin.
 Delete the file `tsconfig.json`
 </details>
 
+### Don't minify the files before deploying
+<details>
+    <summary>Click to expand</summary>
+WARNING: this can result in a HUGE twinkle.js file (>1 MB).
+
+In `webpack.prod.config.js`, flip `mode` from `production` to `development`. Please refer to the Webpack user guide for more precise configurations. 
+</details>
+
 ### Remove prettier
 
 <details>
