@@ -19,7 +19,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.ts'],
+		extensions: ['.js', '.ts'],
 	},
 	plugins: [
 		// specify --excludeEnglishMessages to exclude English messages (about 20 kb) in build

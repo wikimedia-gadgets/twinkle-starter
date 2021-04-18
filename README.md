@@ -175,9 +175,35 @@ Remove any type specifiers and other non-JS syntax you see anywhere.
 
 Run `npm uninstall typescript ts-loader ts-jest @typescript-eslint/eslint-plugin @typescript-eslint/parser`
 
-Run `npm i -D @babel/core @babel/preset-env babel-loader`
+Run `npm i -D @babel/core @babel/preset-env @babel/plugin-proposal-class-properties babel-loader`
 
-Modify `webpack.config.js` and `webpack.prod.config.json` to use <a href="https://www.npmjs.com/package/babel-loader">babel-loader</a> instead of ts-loader.
+Modify `webpack.config.js` and `webpack.prod.config.json` to use <a href="https://www.npmjs.com/package/babel-loader">babel-loader</a> instead of ts-loader. That is, replace
+<pre>
+{
+    test: /\.ts$/,
+    loader: 'ts-loader',
+    options: {
+        transpileOnly: true,
+    },
+}
+</pre> 
+
+with 
+
+<pre>
+{
+    test: /\.js$/,
+    loader: 'babel-loader',
+    options: {
+        presets: [['@babel/preset-env', { targets: 'defaults' }]],
+        plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
+    },
+}
+</pre>
+
+Also replace `entry: './src/twinkle.ts'` with `entry: './src/twinkle.js'`
+
+In package.json, change `"sideEffects": ["src/globals.ts"]` to `"sideEffects": ["src/globals.js"]`
 
 Modify `eslintrc.json` file to remove mentions of typescript parser and plugin.
 

@@ -16,7 +16,7 @@ function readFile(file) {
 	if (fileCache[file] && !args.nocache) {
 		return fileCache[file];
 	}
-	return fileCache[file] = fs.readFileSync(file).toString();
+	return (fileCache[file] = fs.readFileSync(file).toString());
 }
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.ts'],
+		extensions: ['.js', '.ts'],
 	},
 	output: {
 		filename: 'twinkle.js',
@@ -46,9 +46,11 @@ module.exports = {
 		before: function (app, server, compiler) {
 			app.get('/core/*', function (req, response) {
 				let path = req.url.slice('/core'.length);
-				let ctype = req.url.endsWith('.js') ? 'text/javascript' :
-					req.url.endsWith('.css') ? 'text/css' :
-						'text/plain';
+				let ctype = req.url.endsWith('.js')
+					? 'text/javascript'
+					: req.url.endsWith('.css')
+					? 'text/css'
+					: 'text/plain';
 				response.writeHead(200, { 'Content-Type': `${ctype}; charset=utf-8` });
 				response.end(readFile(corePath + path), 'utf-8');
 			});

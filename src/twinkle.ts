@@ -1,7 +1,12 @@
-import { Twinkle, init, loadAdditionalMediaWikiMessages, SiteConfig } from 'twinkle-core';
+import { Twinkle, init, loadAdditionalMediaWikiMessages, SiteConfig } from './core';
 import messages from './messages.json';
 import mwMessageList from './mw-messages';
 
+// import modules
+import { Fluff } from './fluff';
+
+// no customisation; import directly from core
+import { DiffCore as Diff } from './core';
 
 // Check if account is experienced enough to use Twinkle
 if (!Morebits.userIsInGroup('autoconfirmed') && !Morebits.userIsInGroup('confirmed')) {
@@ -12,17 +17,18 @@ Twinkle.userAgent = `Twinkle (${mw.config.get('wgWikiID')})`;
 
 Twinkle.summaryAd = ' ([[Project:TW|TW]])';
 
-Twinkle.changeTags = [];
+Twinkle.changeTags = '';
 
 Twinkle.messageOverrides = messages;
 
 Twinkle.preModuleInitHooks = [
-	() => loadAdditionalMediaWikiMessages(mwMessageList)
+	() => {
+		loadAdditionalMediaWikiMessages(mwMessageList);
+	},
 ];
 
-Twinkle.registeredModules = [
-	// Add modules here
-];
+// List of module classes enabled
+Twinkle.registeredModules = [Fluff, Diff];
 
 /**
  * Adjust the following configurations if necessary
@@ -37,7 +43,6 @@ SiteConfig.botUsernameRegex = /bot\b/i;
 SiteConfig.flaggedRevsNamespaces = [];
 
 SiteConfig.redirectTagAliases = ['#REDIRECT'];
-
 
 // Go!
 init();

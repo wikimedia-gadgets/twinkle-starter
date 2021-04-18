@@ -28,7 +28,7 @@
 	],
 	"dependencies": {
 		"tslib": "2.0.3",
-		"twinkle-core": "^3.0.2-beta"
+		"twinkle-core": "^3.0.7-beta"
 	},
 	"devDependencies": {
 		"@types/chai": "^4.2.16",
