@@ -1,22 +1,51 @@
+const { execSync } = require('child_process');
+
 const OUTPUT_DIR = './build';
 const OUTPUT_FILE = './build/twinkle.js';
 
-const header = `/*  _______________________________________________________________________________
+function isGitWorkDirClean() {
+	try {
+		execSync('git diff-index --quiet HEAD --');
+		return true;
+	} catch (e) {
+		return false;
+	}
+}
+
+function makeHeader() {
+	// This header comment is accurate only if grunt build is run with a clean
+	// working directory.
+	let includeCommitHashInComment = isGitWorkDirClean() || console.warn('\x1b[31m%s\x1b[0m', // red
+		'[WARN] Git working directory is not clean.');
+
+	let header =
+`/*  _______________________________________________________________________________	
  * |                                                                               |
  * |                     === WARNING: GLOBAL GADGET FILE ===                       |
  * |                   Changes to this page affect many users.                     |
  * |  Please discuss changes on the talk page or on [[WT:Gadget]] before editing.  |
  * |_______________________________________________________________________________|
  *
- * Built from source code at GitHub repository [https://github.com/wikimedia-gadgets/twinkle-enwiki]
+ * Built from source code at GitHub repository [https://github.com/#{USER_OR_ORG}#/#{REPO_NAME}#]
  * All changes should be made in the repository. Please do not attempt to edit this file directly.
- * The latest edit summary on this page includes the commit hash of the repository from which
- * the build was generated. You can browse the repo at that point in time using this link:
- * https://github.com/wikimedia-gadgets/twinkle-enwiki/tree/<COMMIT_HASH> after replacing the 
- * placeholder at the end.  
- */
+`;
+	if (includeCommitHashInComment) {
+		const commitSHA = execSync('git rev-parse HEAD').toString().trim();
+		header +=
+` * This build was generated from the source files at the repository as of the commit
+ * ${commitSHA}. You can browse the repo at that point in time using this link:
+ * https://github.com/#{USER_OR_ORG}#/#{REPO_NAME}#/tree/${commitSHA}
+ * Changes between two commits of Twinkle can be compared using
+ * https://github.com/#{USER_OR_ORG}#/#{REPO_NAME}#/compare/COMMIT_HASH_1..COMMIT_HASH_2
+`;
+	}
+
+	header +=
+` */
 /* <nowiki> */
 `;
+	return header;
+}
 
 const footer = `
 /* </nowiki> */`;
@@ -61,7 +90,7 @@ module.exports = function (grunt) {
 		concat: {
 			options: {
 				separator: '\n',
-				banner: header,
+				banner: makeHeader(),
 				footer: footer,
 				stripBanners: {
 					block: true,
