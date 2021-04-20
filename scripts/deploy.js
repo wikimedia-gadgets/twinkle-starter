@@ -63,6 +63,9 @@ const deployTargets = [
 
 class Deploy {
 	async deploy() {
+		if (!isGitWorkDirClean()) {
+			log('red', '[WARN] Git working directory is not clean.');
+		}
 		const config = this.loadConfig();
 		await this.getApi(config);
 		await this.login();
@@ -148,6 +151,15 @@ class Deploy {
 			}
 		}
 		log('yellow', '--- end of deployment ---');
+	}
+}
+
+function isGitWorkDirClean() {
+	try {
+		execSync('git diff-index --quiet HEAD --');
+		return true;
+	} catch (e) {
+		return false;
 	}
 }
 
