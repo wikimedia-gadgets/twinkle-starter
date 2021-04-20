@@ -10,6 +10,8 @@ server.listen(5500, '127.0.0.1', () => {
 	console.log('Starting server on http://localhost:5500');
 });
 
+const GADGET_NAME = 'Twinkle';
+
 // Disable the deployed gadget version when we begin our testing,
 // enable it back again when we stop testing.
 // You need to create a credentials.json file in this directory
@@ -28,7 +30,7 @@ server.listen(5500, '127.0.0.1', () => {
 		}
 		return;
 	}
-	await user.saveOption('gadget-Twinkle', '0').then(() => {
+	await user.saveOption('gadget-' + GADGET_NAME, '0').then(() => {
 		console.log('[i] Disabled twinkle as gadget.');
 	});
 
@@ -38,7 +40,7 @@ server.listen(5500, '127.0.0.1', () => {
 	// Catch ^C
 	process.on('SIGINT', async () => {
 		try {
-			await user.saveOption('gadget-Twinkle', '1');
+			await user.saveOption('gadget-' + GADGET_NAME, '1');
 			console.log('[i] Re-enabled twinkle as gadget.');
 		} catch (e) {
 			console.log(`[i] failed to re-enable twinkle gadget: ${e}`);
