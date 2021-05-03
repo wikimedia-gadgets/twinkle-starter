@@ -14,8 +14,9 @@ git clone https://github.com/wikimedia-gadgets/twinkle-frwiki.git
 cd twinkle-frwiki
 ```
 
-- Now, run `npm install`. If `npm install` doesn't work and you're using npm v7, try `npm install --legacy-peer-deps`. 
+- Now, run `npm install`. If `npm install` doesn't work and you're using npm v7, try `npm install --legacy-peer-deps`.
 - Add code for registering the customisations/localisations needed for your wiki (see sections below). You can test your changes as you go with `npm start`. See details in [Development section below](#user-content-development). This is the longest step in the workflow.
+- Translate messages in twinkle-core to your language if someone hasn't already done so on translatewiki.net (see [section below](#user-content-twinkle-core-message translations)).
 - When you're done, use the `grunt build` command to generate files that you can actually copy over to the wiki (see [Deployment section below](#user-content-deployment) for details). 
 
 This repo contains has all the dependencies and build tool configurations present so that you don't have to bother with them. The most significant dependency is [**twinkle-core**](https://github.com/wikimedia-gadgets/twinkle-core) which provides all the core functionality on top of which you can write your customisations and extensions. There exists automatically generated **[Code Documentation for twinkle-core](https://tools-static.wmflabs.org/twinkle/core-docs)** which provides details on functioning of its various modules.
@@ -74,7 +75,7 @@ class MyCustomModule extends TwinkleModule {
 ```
 
 ### Twinkle-core message translations
-Twinkle-core uses Translatewiki.net for message translations. Check if its messages are available in your wiki's language (https://github.com/wikimedia-gadgets/twinkle-core/tree/master/i18n). For messages that aren't available:
+Twinkle-core uses translatewiki.net for message translations (https://translatewiki.net/wiki/Translating:Twinkle). Check if its messages are available in your wiki's language (https://github.com/wikimedia-gadgets/twinkle-core/tree/master/i18n). For messages that aren't available:
 * Consider contributing the translations directly to translatewiki.net – these messages will be used by all twinkle installations in that language
 * If you can't contribute to translatewiki.net or if there are any messages that you want to be project-specific rather than language-specific, then define them in the `src/messages.json` file. Any messages in this file will override messages coming from translatewiki.net.
 
@@ -256,6 +257,14 @@ If you want to host your code on Gerrit – file a repository request at <a href
 Do check regularly for new twinkle-core releases, since dependabot wouldn't be able to automatically notify you outside GitHub.
 
 </details>
+
+## Need help?
+
+Channels for reporting issues or seeking help include:
+- [Creating an issue](https://github.com/wikimedia-gadgets/twinkle-starter/issues/new) for this repository
+- Asking on the Discord server [Wikimedia-Gadgets](https://discord.gg/P9mqtjBDNb).
+- Asking on [en:WP:TW](https://en.wikipedia.org/wiki/Wikipedia_talk:Twinkle) [not preferred due to clumsiness of wikitext]
+- Directly [emailing the maintainer SD0001](https://en.wikipedia.org/wiki/Special:EmailUser/SD0001) 
 
 ----
 
