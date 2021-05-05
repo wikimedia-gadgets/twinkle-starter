@@ -106,8 +106,8 @@ module.exports = function (grunt) {
 		copy: {
 			main: {
 				files: [
-					{ src: '../twinkle-core/morebits/morebits.js', dest: 'build/morebits.js' },
-					{ src: '../twinkle-core/morebits/morebits.css', dest: 'build/morebits.css' },
+					{ src: './node_modules/twinkle-core/morebits/morebits.js', dest: 'build/morebits.js' },
+					{ src: './node_modules/twinkle-core/morebits/morebits.css', dest: 'build/morebits.css' },
 					{ src: './css/twinkle.css', dest: 'build/twinkle.css' },
 					{ src: './css/twinkle-pagestyles.css', dest: 'build/twinkle-pagestyles.css' },
 				],
