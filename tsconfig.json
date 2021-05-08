@@ -23,7 +23,7 @@
 	"include": [
 		"src/**/*",
 		"./node_modules/types-mediawiki",
-		"../twinkle-core/morebits/index.d.ts"
+		"./node_modules/twinkle-core/morebits/index.d.ts"
 	],
 	"compileOnSave": true
 }
