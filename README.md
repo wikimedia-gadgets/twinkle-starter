@@ -85,16 +85,19 @@ Twinkle-core uses translatewiki.net for message translations (https://translatew
 Firstly, you'll want to make sure your editor is properly configured to work with TypeScript. For example, you may need to install a plugin (such as atom-typescript if you use atom editor), in order to fully take advantage of TypeScript. If you use VS Code, TypeScript support is built-in, so no extensions are required.
 
 Commands:
-- `npm start` - this creates a quick build of the project which you can test by loading `mw.loader.load('http://localhost:5500/twinkle.js');` from your on-wiki common.js page (or from the browser console). 
+- `npm start` - this creates a quick build of the project which you can test by loading `mw.loader.load('http://localhost:5500/dev-loader.js');` from your on-wiki common.js page (or from the browser console). 
 - `grunt build` - this creates a minified single-file build that you copy over to the wiki (see Deployment below).
 
 ### Browser compatibility
 Twinkle-core is compatible with all browsers for which MediaWiki provides JavaScript support, including IE 11. However, in your own customisations, you can choose to [avoid IE11 support](https://www.mediawiki.org/wiki/Compatibility/IE11) unless you have good reason to support IE. Do check MDN docs or [caniuse.com](https://caniuse.com/) before using modern browser APIs to ensure that they're supported in most browsers.
 
 ### Writing automated tests
-Twinkle-starter comes with a test suite which uses [Jest](https://www.npmjs.com/package/jest), [mock-mediawiki](https://www.npmjs.com/package/mock-mediawiki) and [playwright](https://www.npmjs.com/package/playwright). Unit tests for utility functions can be written with mock-mediawiki for mocking any `mw.*` functions if necessary. 
+<details>
+	<summary><i>Unnecessary to begin with. Click to expand.</i></summary>
+Twinkle-starter comes with a test suite which uses Jest, <a href="https://www.npmjs.com/package/mock-mediawiki">mock-mediawiki</a> and <a href="https://www.npmjs.com/package/playwright">playwright</a>. Unit tests for utility functions can be written with mock-mediawiki for mocking any <code>mw.*</code> functions if necessary. 
 
-For writing integration tests, you can spin up a MediaWiki instance using Docker, use playwright for browser automation, and mwn for setting up test fixtures via the API and checking results. See [integration/README.md](https://github.com/wikimedia-gadgets/twinkle-starter/tree/master/tests/integration/README.md) for details. However, note that writing integration tests is quite time-consuming and is likely overkill, unless you plan to make frequent changes. 
+For writing integration tests, you can spin up a MediaWiki instance using Docker, use playwright for browser automation, and mwn for setting up test fixtures via the API and checking results. See <a href="https://github.com/wikimedia-gadgets/twinkle-starter/tree/master/tests/integration/README.md">integration/README.md</a> for details. However, note that writing integration tests is quite time-consuming and is likely overkill, unless you plan to make frequent changes. 
+</details>
 
 ## Deployment
 
