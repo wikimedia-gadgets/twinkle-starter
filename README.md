@@ -3,6 +3,8 @@
 
 This is a template repository to create a Twinkle customisation for a new wiki. 
 
+**NOTE: Due to a recent MediaWiki change, twinkles generated with this template prior to 11 May are broken. To fix the issue, please apply [this patch](https://github.com/wikimedia-gadgets/twinkle-starter/pull/22/commits/484144e21ba0fa58f1bcb7d41782fe8c978f88f4) to your dev-loader.js file**.
+
 ## Getting Started
 You need to have the following installed on your system: (i) [Git](https://git-scm.com/downloads), (ii) [Node.js](https://nodejs.org/en/download/) v13 or above, (iii) npm – though this usually comes along with Node.js. You'll also need to have some basic JavaScript familiarity. 
 
@@ -88,6 +90,8 @@ Commands:
 - `npm start` - this creates a quick build of the project which you can test by loading `mw.loader.load('http://localhost:5500/dev-loader.js');` from your on-wiki common.js page (or from the browser console). 
 - `grunt build` - this creates a minified single-file build that you copy over to the wiki (see Deployment below).
 
+Use your [browser console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Console_messages) to look out for any JavaScript errors (usually opened via Ctrl+Shift+J or Cmd+Option+J or F12).
+
 ### Browser compatibility
 Twinkle-core is compatible with all browsers for which MediaWiki provides JavaScript support, including IE 11. However, in your own customisations, you can choose to [avoid IE11 support](https://www.mediawiki.org/wiki/Compatibility/IE11) unless you have good reason to support IE. Do check MDN docs or [caniuse.com](https://caniuse.com/) before using modern browser APIs to ensure that they're supported in most browsers.
 
@@ -133,7 +137,7 @@ Create a central loader (say [[User:Example/twinkle.js]]):
 ```js
 mw.loader.using([
 	'mediawiki.user', 'mediawiki.util', 'mediawiki.Title', 'mediawiki.api', 
-	'mediawiki.libs.pluralruleparser', 'es6-promise'
+	'mediawiki.libs.pluralruleparser', 'es6-polyfills'
 ]).then(function () {
 	function load(pageName, css) {
 		return mw.loader.getScript(
