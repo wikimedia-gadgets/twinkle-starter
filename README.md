@@ -110,7 +110,7 @@ To generate a production build, run `grunt build`. This build minimises the code
 #### Deploy as a gadget
 Edit MediaWiki:Gadgets-definition to add the Twinkle gadget:
 ```
-*Twinkle[ResourceLoader|dependencies=ext.gadget.morebits,ext.gadget.select2,mediawiki.libs.pluralruleparser,es6-promise,mediawiki.api|type=general|peers=Twinkle-pagestyles]|Twinkle.js|Twinkle.css
+*Twinkle[ResourceLoader|dependencies=ext.gadget.morebits,ext.gadget.select2,mediawiki.libs.pluralruleparser,es6-polyfills,mediawiki.api|type=general|peers=Twinkle-pagestyles]|Twinkle.js|Twinkle.css
 *morebits[ResourceLoader|dependencies=mediawiki.user,mediawiki.util,mediawiki.Title,jquery.ui|hidden]|morebits.js|morebits.css
 *Twinkle-pagestyles[hidden|skins=vector]|Twinkle-pagestyles.css
 *select2[ResourceLoader|hidden]|select2.min.js|select2.min.css
