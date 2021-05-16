@@ -1,5 +1,5 @@
 // Jest globals
-/* globals jest, describe, test, beforeAll */
+// jest, describe, test, beforeAll
 
 // jest-playwright globals
 /* globals jestPlaywright, page, browser, context, browserName, deviceName */

@@ -15,8 +15,6 @@
  *
  */
 
-/* globals mw */
-
 mw.loader.using([
 	'mediawiki.api', 'mediawiki.Title', 'mediawiki.user', 'mediawiki.util',
 	'mediawiki.libs.pluralruleparser', 'es6-polyfills'

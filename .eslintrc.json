@@ -1,0 +1,28 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true,
+		"jquery": true,
+		"jest": true
+	},
+	"globals": {
+		"mw": "readonly",
+		"Morebits": "readonly"
+	},
+	"extends": [
+		"eslint:recommended"
+		// "plugin:@typescript-eslint/recommended"
+	],
+	"ignorePatterns": ["build/"],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 12
+	},
+	"plugins": ["@typescript-eslint"],
+	"rules": {
+		"no-undef": "off", // typescript takes better care of these
+		"no-mixed-spaces-and-tabs": "off", // clashes with prettier
+		"no-unused-vars": "off", // buggy
+		"no-empty": "off"
+	}
+}

@@ -19,7 +19,6 @@ Object.defineProperty(chai.Assertion.prototype, 'not', {
 	},
 	set(newNot) {
 		this.assignedNot = newNot;
-		return newNot;
 	},
 });
 
@@ -30,8 +29,7 @@ const originalExpect = global.expect;
 global.expect = (actual) => {
 	const originalMatchers = originalExpect(actual);
 	const chaiMatchers = chai.expect(actual);
-	const combinedMatchers = Object.assign(chaiMatchers, originalMatchers);
-	return combinedMatchers;
+	return Object.assign(chaiMatchers, originalMatchers);
 };
 
 // Now fix the types

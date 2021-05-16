@@ -89,10 +89,10 @@ class Deploy {
 			this.usingOAuth = true;
 		} catch (e) {
 			if (!config.username) {
-				config.username = await prompt('> Enter username');
+				config.username = await input('> Enter username');
 			}
 			if (!config.password) {
-				config.password = await prompt('> Enter bot password', 'password');
+				config.password = await input('> Enter bot password', 'password');
 			}
 		}
 		if (args.testwiki) {
@@ -102,7 +102,7 @@ class Deploy {
 				if (Object.keys(config).length) {
 					log('yellow', 'Tip: you can avoid this prompt by setting the apiUrl as well in credentials.json');
 				}
-				const site = await prompt('> Enter sitename (eg. en.wikipedia.org)');
+				const site = await input('> Enter sitename (eg. en.wikipedia.org)');
 				config.apiUrl = `https://${site}/w/api.php`;
 			}
 		}
@@ -122,7 +122,7 @@ class Deploy {
 	// TODO: read last saved commit hash and use that to construct a meaningful summary
 	async makeEditSummary() {
 		const sha = execSync('git rev-parse --short HEAD').toString('utf8').trim();
-		const message = await prompt('> Edit summary message (optional): ');
+		const message = await input('> Edit summary message (optional): ');
 		this.editSummary = `Commit ${sha}: ${message || 'Updated from repository'}`;
 		console.log(`Edit summary is: "${this.editSummary}"`);
 	}
@@ -132,7 +132,7 @@ class Deploy {
 	}
 
 	async savePages() {
-		await prompt(`> Press [Enter] to start deploying to ${this.siteName} or [ctrl + C] to cancel`);
+		await input(`> Press [Enter] to start deploying to ${this.siteName} or [ctrl + C] to cancel`);
 
 		log('yellow', '--- starting deployment ---');
 
@@ -163,7 +163,7 @@ function isGitWorkDirClean() {
 	}
 }
 
-async function prompt(message, type = 'text', initial = '') {
+async function input(message, type = 'text', initial = '') {
 	let name = String(Math.random());
 	return (await prompts({ type, name, message, initial }))[name];
 }

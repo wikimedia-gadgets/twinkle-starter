@@ -4,8 +4,8 @@
 	"description": "#{DESC}#",
 	"scripts": {
 		"format": "prettier --write .",
-		"lint": "eslint .",
-		"lint:fix": "eslint . --fix",
+		"lint": "eslint . --ext .js --ext .ts",
+		"lint:fix": "eslint . --ext .js --ext .ts --fix",
 		"build": "grunt build",
 		"quickbuild": "webpack",
 		"start": "node scripts/server.js",
