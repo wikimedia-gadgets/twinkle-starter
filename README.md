@@ -54,7 +54,7 @@ Customisation written for English Wikipedia at [wikimedia-gadgets/twinkle-enwiki
 Apart from extending the core module, you can also create your own modules customised to the needs of your wiki. In general, a Twinkle module is structured as follows:
 
 ```js
-import TwinkleModule from 'twinkle-core';
+import { TwinkleModule } from './core';
 
 // A singleton class: only one instance is ever created
 class MyCustomModule extends TwinkleModule {
