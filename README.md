@@ -18,7 +18,7 @@ cd twinkle-frwiki
 
 - Now, run `npm install`. If `npm install` doesn't work and you're using npm v7, try `npm install --legacy-peer-deps`.
 - Add code for registering the customisations/localisations needed for your wiki (see sections below). You can test your changes as you go with `npm start`. See details in [Development section below](#user-content-development). This is the longest step in the workflow.
-- Translate messages in twinkle-core to your language if someone hasn't already done so on translatewiki.net (see [section below](#user-content-twinkle-core-message translations)).
+- Translate messages in twinkle-core to your language if someone hasn't already done so on translatewiki.net (see [section below](#user-content-twinkle-core-message-translations)).
 - When you're done, use the `grunt build` command to generate files that you can actually copy over to the wiki (see [Deployment section below](#user-content-deployment) for details). 
 
 This repo contains has all the dependencies and build tool configurations present so that you don't have to bother with them. The most significant dependency is [**twinkle-core**](https://github.com/wikimedia-gadgets/twinkle-core) which provides all the core functionality on top of which you can write your customisations and extensions. There exists automatically generated **[Code Documentation for twinkle-core](https://tools-static.wmflabs.org/twinkle/core-docs)** which provides details on functioning of its various modules.
