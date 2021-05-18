@@ -270,7 +270,7 @@ Do check regularly for new twinkle-core releases, since dependabot wouldn't be a
 Channels for reporting issues or seeking help include:
 - [Creating an issue](https://github.com/wikimedia-gadgets/twinkle-starter/issues/new) for this repository
 - Asking on the Discord server [Wikimedia-Gadgets](https://discord.gg/P9mqtjBDNb).
-- Asking on [en:WP:TW](https://en.wikipedia.org/wiki/Wikipedia_talk:Twinkle) [not preferred due to clumsiness of wikitext]
+- Asking on [en:WT:TW](https://en.wikipedia.org/wiki/Wikipedia_talk:Twinkle) [not preferred due to clumsiness of wikitext]
 - Directly [emailing the maintainer SD0001](https://en.wikipedia.org/wiki/Special:EmailUser/SD0001) 
 
 ----
