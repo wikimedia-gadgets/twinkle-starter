@@ -6,6 +6,9 @@
  * If you are using plain JavaScript in your project, note that all source
  * files should end .js extension. The contents of this file are valid in
  * both JS and TS.
+ *
+ * Only ONE of the export statements below should be activated. Keep the rest
+ * commented out.
  */
 
 // For use with TypeScript

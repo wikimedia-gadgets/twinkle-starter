@@ -8,7 +8,7 @@ This is a template repository to create a Twinkle customisation for a new wiki.
 ## Getting Started
 You need to have the following installed on your system: (i) [Git](https://git-scm.com/downloads), (ii) [Node.js](https://nodejs.org/en/download/) v13 or above, (iii) npm – though this usually comes along with Node.js. You'll also need to have some basic JavaScript familiarity. 
 
-- To use this template, click on the ![Use this template](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) button near the top (don't clone this repo). Give your repo a suitable name, such as "twinlke-frwiki" if it is for the French Wikipedia. The [template initialisation workflow](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/.github/workflows/template_initialization.yaml) will shortly create a new commit in your repository replacing the placeholders in the package.json file. Add the [topic "wikimedia-twinkle"](https://github.com/topics/wikimedia-twinkle) to your GitHub repository so that it is easy for others to locate all twinkle repos. If you don't wish to use GitHub, please see [the note below](#user-content-use-a-source-code-host-other-than-github).
+- To use this template, click on the ![Use this template](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) button near the top (don't clone this repo). Give your repo a suitable name, such as "twinlke-frwiki" if it is for the French Wikipedia. The [template initialisation workflow](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/.github/workflows/template_initialization.yaml) will shortly create a new commit in your repository replacing the placeholders in the package.json file. If you don't wish to use GitHub, please see [the note below](#user-content-use-a-source-code-host-other-than-github).
 
 - Clone the generated repo: (remember to replace "twinkle-frwiki" in the commands with the actual name of your repository!) 
 ```bash
@@ -44,7 +44,7 @@ As of now, twinkle-core provides the following modules:
 - [BatchDelete](https://twinkle.toolforge.org/core-docs/classes/batchdeletecore.html) - (for admins) batch page deletions
 - [BatchUndelete](https://twinkle.toolforge.org/core-docs/classes/batchundeletecore.html) - (for admins) batch undeletion of pages linked from a given page
 
-Refer to the documentation of each module for guidance on configuring them. Fluff, Diff, Unlink, BatchDelete and BatchUndelete require virtually no configuration.
+Of these, Fluff and Diff modules work out of the box. The remaining need some configuration. Refer to the documentation of each module for guidance on configuring them. Fluff, Diff, Unlink, BatchDelete and BatchUndelete require virtually no configuration.
 
 Each module in Twinkle extends the abstract class [TwinkleModule](https://twinkle.toolforge.org/core-docs/classes/twinklemodule.html). Some core module classes are also abstract, indicating they don't work by themselves and must be extended with the specified abstract fields or methods that you have to provide.  
 
@@ -183,7 +183,9 @@ Remove any type specifiers and other non-JS syntax you see anywhere.
 
 Run `npm uninstall typescript ts-loader ts-jest @typescript-eslint/eslint-plugin @typescript-eslint/parser`
 
-Run `npm i -D @babel/core @babel/preset-env @babel/plugin-proposal-class-properties babel-loader`
+Run `npm i -D @babel/core @babel/preset-env babel-loader`
+
+In `src/core.ts`, uncomment the line `export * from 'twinkle-core/js/src/index'` and comment out the others.
 
 Modify `webpack.config.js` and `webpack.prod.config.json` to use <a href="https://www.npmjs.com/package/babel-loader">babel-loader</a> instead of ts-loader. That is, replace
 <pre>
@@ -203,8 +205,7 @@ with
     test: /\.js$/,
     loader: 'babel-loader',
     options: {
-        presets: [['@babel/preset-env', { targets: 'defaults' }]],
-        plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
+        presets: [['@babel/preset-env', { targets: 'defaults', loose: true }]],
     },
 }
 </pre>
@@ -213,7 +214,7 @@ Also replace `entry: './src/twinkle.ts'` with `entry: './src/twinkle.js'`
 
 In package.json, change `"sideEffects": ["src/globals.ts"]` to `"sideEffects": ["src/globals.js"]`
 
-Modify `eslintrc.json` file to remove mentions of typescript parser and plugin.
+Modify `eslintrc.json` file to remove `"parser": "@typescript-eslint/parser"` and `"plugins": ["@typescript-eslint"]`.
 
 Delete the file `tsconfig.json`
 </details>

@@ -2,6 +2,8 @@ FROM mediawiki
 
 WORKDIR /var/www/html
 
+# TODO: Use latest version of MediaWiki deployed on WMF production rather than 1.35 LTS version
+
 # TODO: import PGP keys with the full fingerprint to check signatures and/or embed checksums
 
 # Install composer
