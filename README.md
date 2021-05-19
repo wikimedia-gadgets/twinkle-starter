@@ -187,7 +187,7 @@ Run `npm i -D @babel/core @babel/preset-env babel-loader`
 
 In `src/core.ts`, uncomment the line `export * from 'twinkle-core/js/src/index'` and comment out the others.
 
-Modify `webpack.config.js` and `webpack.prod.config.json` to use <a href="https://www.npmjs.com/package/babel-loader">babel-loader</a> instead of ts-loader. That is, replace
+Modify `webpack.config.js` to use <a href="https://www.npmjs.com/package/babel-loader">babel-loader</a> instead of ts-loader. That is, replace
 <pre>
 {
     test: /\.ts$/,

@@ -1,4 +1,7 @@
+const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 const { execSync } = require('child_process');
+const args = require('minimist')(process.argv.slice(2));
 
 const OUTPUT_DIR = './build';
 const OUTPUT_FILE = './build/twinkle.js';
@@ -56,7 +59,30 @@ module.exports = function (grunt) {
 		clean: [OUTPUT_DIR],
 
 		webpack: {
-			myConfig: require('./webpack.prod.config.js'),
+			myConfig: {
+				...require('./webpack.config'),
+				devtool: undefined,
+				devServer: undefined,
+				mode: 'production',
+				plugins: [
+					// specify --excludeEnglishMessages to exclude English messages (about 20 kb) in build
+					// Do this ONLY if you are sure all messages have been translated into your local language,
+					// otherwise users will see message keys
+					new webpack.DefinePlugin({
+						EXCLUDE_ENGLISH_MESSAGES: Boolean(args.excludeEnglishMessages)
+					})
+				],
+				optimization: {
+					minimizer: [
+						new TerserPlugin({
+							extractComments: /@preserve/,
+						}),
+					],
+				},
+				performance: {
+					hints: false,
+				},
+			},
 		},
 
 		// Escape any nowiki tags in code so they don't break the on-wiki gadget file
