@@ -141,7 +141,7 @@ mw.loader.using([
 ]).then(function () {
 	function load(pageName, css) {
 		return mw.loader.getScript(
-			'/w/index.php?title=User:Example' + pageName + '&action=raw&ctype=text/' + (css ? 'css' : 'javascript'), 
+			'/w/index.php?title=User:Example/' + pageName + '&action=raw&ctype=text/' + (css ? 'css' : 'javascript'), 
 			css ? 'text/css' : null  
         );
 	}
