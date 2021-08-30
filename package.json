@@ -48,7 +48,7 @@
 		"grunt-contrib-clean": "^2.0.0",
 		"grunt-contrib-concat": "^1.0.1",
 		"grunt-contrib-copy": "^1.0.0",
-		"grunt-replace": "^1.0.1",
+		"grunt-replace": "^2.0.2",
 		"grunt-webpack": "^4.0.2",
 		"husky": "^4.3.7",
 		"jest": "^26.6.3",
