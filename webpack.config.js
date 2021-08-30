@@ -19,6 +19,13 @@ module.exports = {
 					transpileOnly: true,
 				},
 			},
+			{
+				test: /\.js$/,
+				loader: 'babel-loader',
+				options: {
+					presets: [['@babel/preset-env', { targets: 'defaults', loose: true }]],
+				},
+			},
 		],
 	},
 	resolve: {
