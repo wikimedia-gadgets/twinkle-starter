@@ -27,7 +27,7 @@
 		"src/globals.ts"
 	],
 	"dependencies": {
-		"tslib": "2.0.3",
+		"tslib": "2.3.1",
 		"twinkle-core": "^3.1.2"
 	},
 	"devDependencies": {
