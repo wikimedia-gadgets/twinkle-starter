@@ -28,7 +28,7 @@
 	],
 	"dependencies": {
 		"tslib": "2.0.3",
-		"twinkle-core": "^3.1.0"
+		"twinkle-core": "^3.1.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.15.0",

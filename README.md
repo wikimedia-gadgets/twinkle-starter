@@ -3,7 +3,7 @@
 
 This is a template repository to create a Twinkle customisation for a new wiki. 
 
-**NOTE: Due to a recent MediaWiki change, twinkles generated with this template prior to 11 May are broken. To fix the issue, please apply [this patch](https://github.com/wikimedia-gadgets/twinkle-starter/pull/22/commits/484144e21ba0fa58f1bcb7d41782fe8c978f88f4) to your dev-loader.js file**.
+**NOTE: Twinkles generated with this template some time ago may no longer be working. To fix the issue, ensure you've the following patches applied: [package.json & webpack.config.json](https://github.com/wikimedia-gadgets/twinkle-starter/commit/8c232ae104455d87c58293b1ed4cb51c8e827ffd), [dev-loader.js](https://github.com/wikimedia-gadgets/twinkle-starter/pull/22/commits/484144e21ba0fa58f1bcb7d41782fe8c978f88f4) Also ensure you're using the latest version of twinkle-core (v3.1.2).**
 
 ## Getting Started
 You need to have the following installed on your system: (i) [Git](https://git-scm.com/downloads), (ii) [Node.js](https://nodejs.org/en/download/) v13 or above, (iii) npm – though this usually comes along with Node.js. You'll also need to have some basic JavaScript familiarity. 
@@ -181,40 +181,17 @@ Rename all `.ts` files to `.js`.
 
 Remove any type specifiers and other non-JS syntax you see anywhere.
 
-Run `npm uninstall typescript ts-loader ts-jest @typescript-eslint/eslint-plugin @typescript-eslint/parser`
-
-Run `npm i -D @babel/core @babel/preset-env babel-loader`
-
 In `src/core.ts`, uncomment the line `export * from 'twinkle-core/js/src/index'` and comment out the others.
 
-Modify `webpack.config.js` to use <a href="https://www.npmjs.com/package/babel-loader">babel-loader</a> instead of ts-loader. That is, replace
-<pre>
-{
-    test: /\.ts$/,
-    loader: 'ts-loader',
-    options: {
-        transpileOnly: true,
-    },
-}
-</pre> 
-
-with 
-
-<pre>
-{
-    test: /\.js$/,
-    loader: 'babel-loader',
-    options: {
-        presets: [['@babel/preset-env', { targets: 'defaults', loose: true }]],
-    },
-}
-</pre>
-
-Also replace `entry: './src/twinkle.ts'` with `entry: './src/twinkle.js'`
+In webpack.config.json, replace `entry: './src/twinkle.ts'` with `entry: './src/twinkle.js'`
 
 In package.json, change `"sideEffects": ["src/globals.ts"]` to `"sideEffects": ["src/globals.js"]`
 
 Modify `eslintrc.json` file to remove `"parser": "@typescript-eslint/parser"` and `"plugins": ["@typescript-eslint"]`.
+
+Optional cleanup steps:
+
+Run `npm uninstall typescript tslib ts-loader ts-jest @typescript-eslint/eslint-plugin @typescript-eslint/parser`
 
 Delete the file `tsconfig.json`
 </details>
