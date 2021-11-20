@@ -3,7 +3,7 @@
 
 This is a template repository to create a Twinkle customisation for a new wiki. 
 
-**NOTE: Twinkles generated with this template some time ago may no longer be working. To fix the issue, ensure you've the following patches applied: [package.json & webpack.config.json](https://github.com/wikimedia-gadgets/twinkle-starter/commit/8c232ae104455d87c58293b1ed4cb51c8e827ffd), [dev-loader.js](https://github.com/wikimedia-gadgets/twinkle-starter/pull/22/commits/484144e21ba0fa58f1bcb7d41782fe8c978f88f4) Also ensure you're using the latest version of twinkle-core (v3.1.2).**
+**NOTE: Twinkles generated with this template some time ago may no longer be working. To fix the issue(s), ensure you've the following patches applied: [package.json & webpack.config.json](https://github.com/wikimedia-gadgets/twinkle-starter/commit/8c232ae104455d87c58293b1ed4cb51c8e827ffd), [dev-loader.js](https://github.com/wikimedia-gadgets/twinkle-starter/pull/22/commits/484144e21ba0fa58f1bcb7d41782fe8c978f88f4), [Gruntfile.js](https://github.com/wikimedia-gadgets/twinkle-starter/commit/28c846bac) Also ensure you're using the latest version of twinkle-core (v3.1.2).**
 
 ## Getting Started
 You need to have the following installed on your system: (i) [Git](https://git-scm.com/downloads), (ii) [Node.js](https://nodejs.org/en/download/) v13 or above, (iii) npm – though this usually comes along with Node.js. You'll also need to have some basic JavaScript familiarity. 
