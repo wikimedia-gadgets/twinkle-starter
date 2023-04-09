@@ -13,7 +13,7 @@ jobs:
     if: ${{ github.event.created && github.repository != 'wikimedia-gadgets/twinkle-starter' }}
     steps:
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: |
           mv README.template.md README.md
 
@@ -35,7 +35,7 @@ jobs:
           git config --local user.name "twinkle_bot"
           git commit -am "Replacing the template's placeholders"
       - name: Push changes
-        uses: ad-m/github-push-action@v0.5.0
+        uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           branch: master
