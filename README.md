@@ -3,10 +3,10 @@
 
 This is a template repository to create a Twinkle customisation for a new wiki. 
 
-**NOTE: Twinkles generated with this template some time ago may no longer be working. To fix the issue(s), ensure you've the following patches applied: [package.json & webpack.config.json](https://github.com/wikimedia-gadgets/twinkle-starter/commit/8c232ae104455d87c58293b1ed4cb51c8e827ffd), [dev-loader.js](https://github.com/wikimedia-gadgets/twinkle-starter/pull/22/commits/484144e21ba0fa58f1bcb7d41782fe8c978f88f4), [Gruntfile.js](https://github.com/wikimedia-gadgets/twinkle-starter/commit/28c846bac) Also ensure you're using the latest version of twinkle-core (v3.1.2).**
+**NOTE: Twinkles generated with this template some time ago may no longer be working. To fix the issue(s), ensure you have the following patches applied: [package.json & webpack.config.json](https://github.com/wikimedia-gadgets/twinkle-starter/commit/8c232ae104455d87c58293b1ed4cb51c8e827ffd), [dev-loader.js](https://github.com/wikimedia-gadgets/twinkle-starter/pull/22/commits/484144e21ba0fa58f1bcb7d41782fe8c978f88f4), [Gruntfile.js](https://github.com/wikimedia-gadgets/twinkle-starter/commit/28c846bac). Also ensure you're using the latest version of twinkle-core (v3.1.2).**
 
 ## Getting Started
-You need to have the following installed on your system: (i) [Git](https://git-scm.com/downloads), (ii) [Node.js](https://nodejs.org/en/download/) v13 or above, (iii) npm – though this usually comes along with Node.js. You'll also need to have some basic JavaScript familiarity. 
+You need to have the following installed on your system: (i) [Git](https://git-scm.com/downloads), (ii) [Node.js](https://nodejs.org/en/download/) v13 or above, (iii) npm – although this usually comes along with Node.js. You'll also need to have some basic JavaScript familiarity. 
 
 - To use this template, click on the ![Use this template](https://user-images.githubusercontent.com/6702424/98155461-92395e80-1ed6-11eb-93b2-98c64453043f.png) button near the top (don't clone this repo). Give your repo a suitable name, such as "twinkle-frwiki" if it is for the French Wikipedia. The [template initialisation workflow](https://github.com/wikimedia-gadgets/twinkle-starter/blob/master/.github/workflows/template_initialization.yaml) will shortly create a new commit in your repository replacing the placeholders in the package.json file. If you don't wish to use GitHub, please see [the note below](#user-content-use-a-source-code-host-other-than-github).
 
@@ -21,7 +21,7 @@ cd twinkle-frwiki
 - Translate messages in twinkle-core to your language if someone hasn't already done so on translatewiki.net (see [section below](#user-content-twinkle-core-message-translations)).
 - When you're done, use the `grunt build` command to generate files that you can actually copy over to the wiki (see [Deployment section below](#user-content-deployment) for details). 
 
-This repo contains has all the dependencies and build tool configurations present so that you don't have to bother with them. The most significant dependency is [**twinkle-core**](https://github.com/wikimedia-gadgets/twinkle-core) which provides all the core functionality on top of which you can write your customisations and extensions. There exists automatically generated **[Code Documentation for twinkle-core](https://tools-static.wmflabs.org/twinkle/core-docs)** which provides details on functioning of its various modules.
+This repo contains all the dependencies and build tool configurations present so that you don't have to bother with them. The most significant dependency is [**twinkle-core**](https://github.com/wikimedia-gadgets/twinkle-core) which provides all the core functionality on top of which you can write your customisations and extensions. There exists automatically generated **[Code Documentation for twinkle-core](https://tools-static.wmflabs.org/twinkle/core-docs)** which provides details on functioning of its various modules.
 
 Twinkle-core uses [TypeScript](https://www.typescriptlang.org/) – a compiled superset of JavaScript that makes it easier to write bug-free applications. You can choose to write your customisations in either JavaScript or TypeScript. However, using JavaScript files causes all type-safety features built into twinkle-core to be side-stepped, which may make it harder to debug. Since TypeScript is a superset of JavaScript, all JS code is also valid TS code; as such you can write JS code in TS files – this should still make it easier to catch errors. If you are new to TypeScript, refer to the [official documentation's introduction for JS programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html).
 
@@ -46,7 +46,7 @@ As of now, twinkle-core provides the following modules:
 
 Of these, Fluff and Diff modules work out of the box. The remaining need some configuration. Refer to the documentation of each module for guidance on configuring them. Fluff, Diff, Unlink, BatchDelete and BatchUndelete require virtually no configuration.
 
-Each module in Twinkle extends the abstract class [TwinkleModule](https://twinkle.toolforge.org/core-docs/classes/twinklemodule.html). Some core module classes are also abstract, indicating they don't work by themselves and must be extended with the specified abstract fields or methods that you have to provide.  
+Each module in Twinkle extends the abstract class [TwinkleModule](https://twinkle.toolforge.org/core-docs/classes/twinklemodule.html). Some core module classes are also abstract, indicating that they don't work by themselves and must be extended with the specified abstract fields or methods that you have to provide.  
 
 Customisation written for English Wikipedia at [wikimedia-gadgets/twinkle-enwiki](https://github.com/wikimedia-gadgets/twinkle-enwiki) can be used as a reference.
 
@@ -79,7 +79,7 @@ class MyCustomModule extends TwinkleModule {
 ### Twinkle-core message translations
 Twinkle-core uses translatewiki.net for message translations (https://translatewiki.net/wiki/Translating:Twinkle). Check if its messages are available in your wiki's language (https://github.com/wikimedia-gadgets/twinkle-core/tree/master/i18n). For messages that aren't available:
 * Consider contributing the translations directly to translatewiki.net – these messages will be used by all twinkle installations in that language
-* If you can't contribute to translatewiki.net or if there are any messages that you want to be project-specific rather than language-specific, then define them in the `src/messages.json` file. Any messages in this file will override messages coming from translatewiki.net.
+* If you can't contribute to translatewiki.net or if there are any messages that you want to be project-specific rather than language-specific, define them in the `src/messages.json` file. Any messages in this file will override messages coming from translatewiki.net.
 
 
 ## Development
@@ -247,10 +247,10 @@ Do check regularly for new twinkle-core releases, since dependabot wouldn't be a
 
 Channels for reporting issues or seeking help include:
 - [Creating an issue](https://github.com/wikimedia-gadgets/twinkle-starter/issues/new) for this repository
-- Asking on the Discord server [Wikimedia-Gadgets](https://discord.gg/P9mqtjBDNb).
+- Asking on the Discord server [Wikimedia-Gadgets](https://discord.gg/P9mqtjBDNb)
 - Asking on [en:WT:TW](https://en.wikipedia.org/wiki/Wikipedia_talk:Twinkle) [not preferred due to clumsiness of wikitext]
 - Directly [emailing the maintainer SD0001](https://en.wikipedia.org/wiki/Special:EmailUser/SD0001) 
 
 ----
 
-Developed as part of [Grants:Project/Rapid/SD0001/Twinkle localisation](https://meta.wikimedia.org/wiki/Grants:Project/Rapid/SD0001/Twinkle_localisation).
+Developed as part of [Grants:Project/Rapid/SD0001/Twinkle localisation](https://meta.wikimedia.org/wiki/Grants:Project/Rapid/SD0001/Twinkle_localisation)
