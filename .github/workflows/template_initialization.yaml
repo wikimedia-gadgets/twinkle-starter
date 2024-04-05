@@ -11,6 +11,7 @@ jobs:
   template_initialization:
     runs-on: ubuntu-latest
     if: ${{ github.event.created && github.repository != 'wikimedia-gadgets/twinkle-starter' }}
+    permissions: write-all
     steps:
 
       - uses: actions/checkout@v3
@@ -35,7 +36,7 @@ jobs:
           git config --local user.name "twinkle_bot"
           git commit -am "Replacing the template's placeholders"
       - name: Push changes
-        uses: ad-m/github-push-action@v0.6.0
+        uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           branch: master
