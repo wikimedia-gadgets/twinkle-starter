@@ -1,11 +1,11 @@
 /**
  * Browser-context code to load Twinkle
  *
- * http://localhost:5500/core/* resolves to the path to twinkle-core
- * are is served via webpack-dev-server's before config
+ * http://localhost:5500/core/* resolves to the path to twinkle-core,
+ * served via webpack-dev-server's setupMiddlewares config
  *
  * http://localhost:5500/css loads css/twinkle.css via another of
- * webpack-dev-server before configs
+ * webpack-dev-server setupMiddlewares configs
  *
  * http://localhost:5500/twinkle.js is served in-memory
  * via webpack-dev-server
@@ -17,7 +17,7 @@
 
 mw.loader.using([
 	'mediawiki.api', 'mediawiki.Title', 'mediawiki.user', 'mediawiki.util',
-	'mediawiki.storage', 'mediawiki.libs.pluralruleparser', 'es6-polyfills'
+	'mediawiki.storage', 'mediawiki.libs.pluralruleparser'
 ]).then(function() {
 	mw.loader.getScript('http://localhost:5500/core/morebits/morebits.js').then(function () {
 		mw.loader.getScript('http://localhost:5500/twinkle.js');

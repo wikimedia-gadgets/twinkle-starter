@@ -16,7 +16,7 @@ git clone https://github.com/wikimedia-gadgets/twinkle-frwiki.git
 cd twinkle-frwiki
 ```
 
-- Now, run `npm install`. If `npm install` doesn't work and you're using npm v7, try `npm install --legacy-peer-deps`.
+- Now, run `npm install`.
 - Add code for registering the customisations/localisations needed for your wiki (see sections below). You can test your changes as you go with `npm start`. See details in [Development section below](#user-content-development). This is the longest step in the workflow.
 - Translate messages in twinkle-core to your language if someone hasn't already done so on translatewiki.net (see [section below](#user-content-twinkle-core-message-translations)).
 - When you're done, use the `grunt build` command to generate files that you can actually copy over to the wiki (see [Deployment section below](#user-content-deployment) for details). 
@@ -93,7 +93,7 @@ Commands:
 Use your [browser console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Console_messages) to look out for any JavaScript errors (usually opened via Ctrl+Shift+J or Cmd+Option+J or F12).
 
 ### Browser compatibility
-Twinkle-core is compatible with all browsers for which MediaWiki provides JavaScript support, including IE 11. However, in your own customisations, you can choose to [avoid IE11 support](https://www.mediawiki.org/wiki/Compatibility/IE11) unless you have good reason to support IE. Do check MDN docs or [caniuse.com](https://caniuse.com/) before using modern browser APIs to ensure that they're supported in most browsers.
+Twinkle-core is compatible with all browsers for which MediaWiki provides JavaScript support. Do check MDN docs or [caniuse.com](https://caniuse.com/) before using modern browser APIs to ensure that they're supported in most browsers.
 
 ### Writing automated tests
 <details>

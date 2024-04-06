@@ -2,11 +2,13 @@ const Webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server/lib/Server');
 const webpackConfig = require('../webpack.config');
 
-const compiler = Webpack(webpackConfig);
-const devServerOptions = Object.assign({}, webpackConfig.devServer);
-const server = new WebpackDevServer(compiler, devServerOptions);
+// See https://webpack.js.org/api/webpack-dev-server/#start
 
-server.listen(5500, '127.0.0.1', () => {
+const compiler = Webpack(webpackConfig);
+const devServerOptions = Object.assign({}, webpackConfig.devServer, {open: true});
+const server = new WebpackDevServer(devServerOptions, compiler);
+
+server.start().then(() => {
 	console.log('Starting server on http://localhost:5500');
 });
 

@@ -9,7 +9,7 @@ module.exports = {
 	devtool: 'source-map',
 
 	entry: './src/twinkle.ts',
-	target: ['web', 'es5'],
+	target: ['web', 'es6'],
 	module: {
 		rules: [
 			{
@@ -37,8 +37,8 @@ module.exports = {
 	},
 
 	devServer: {
-		before: function (app, server, compiler) {
-			app.get('/core/*', function (req, response) {
+		setupMiddlewares: function (middlewares, server) {
+			server.app.get('/core/*', function (req, response) {
 				let path = req.url.slice('/core'.length);
 				let ctype = req.url.endsWith('.js')
 					? 'text/javascript'
@@ -48,17 +48,20 @@ module.exports = {
 				response.writeHead(200, { 'Content-Type': `${ctype}; charset=utf-8` });
 				response.end(readFile(corePath + path), 'utf-8');
 			});
-			app.get('/css', function (req, response) {
+			server.app.get('/css', function (req, response) {
 				response.writeHead(200, { 'Content-Type': `text/css; charset=utf-8` });
 				response.end(readFile('./css/twinkle.css'), 'utf-8');
 			});
-			app.get('/', function (req, response) {
+			server.app.get('/', function (req, response) {
 				response.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8' });
 				response.end(readFile('./dev-loader.js'), 'utf-8');
 			});
+			return middlewares;
 		},
-		contentBase: path.join(__dirname, 'build'),
+		static: path.join(__dirname, 'build'),
 		port: 5500,
+		host: 'localhost',
+		allowedHosts: 'all'
 	},
 };
 
