@@ -110,7 +110,7 @@ To generate a production build, run `grunt build`. This build minimises the code
 #### Deploy as a gadget
 Edit MediaWiki:Gadgets-definition to add the Twinkle gadget:
 ```
-*Twinkle[ResourceLoader|dependencies=ext.gadget.morebits,ext.gadget.select2,mediawiki.storage,mediawiki.libs.pluralruleparser,es6-polyfills,mediawiki.api|type=general|peers=Twinkle-pagestyles]|Twinkle.js|Twinkle.css
+*Twinkle[ResourceLoader|dependencies=ext.gadget.morebits,ext.gadget.select2,mediawiki.storage,mediawiki.libs.pluralruleparser,mediawiki.api|type=general|peers=Twinkle-pagestyles]|Twinkle.js|Twinkle.css
 *morebits[ResourceLoader|dependencies=mediawiki.user,mediawiki.util,mediawiki.Title,jquery.ui|hidden]|morebits.js|morebits.css
 *Twinkle-pagestyles[hidden|skins=vector]|Twinkle-pagestyles.css
 *select2[ResourceLoader|hidden]|select2.min.js|select2.min.css
@@ -137,7 +137,7 @@ Create a central loader (say [[User:Example/twinkle.js]]):
 ```js
 mw.loader.using([
 	'mediawiki.user', 'mediawiki.util', 'mediawiki.Title', 'mediawiki.api',
-	'mediawiki.storage', 'mediawiki.libs.pluralruleparser', 'es6-polyfills'
+	'mediawiki.storage', 'mediawiki.libs.pluralruleparser'
 ]).then(function () {
 	function load(pageName, css) {
 		return mw.loader.getScript(
@@ -244,7 +244,7 @@ Do check regularly for new twinkle-core releases, since dependabot wouldn't be a
 </details>
 
 ## Troubleshooting
-- Getting `JavaScript parse error (scripts need to be valid ES5)` after deploying the output of `grunt build`:
+- Getting `JavaScript parse error (scripts need to be valid ECMAScript 5)` after deploying the output of `grunt build`:
   - This is because your wiki doesn't support ES6 for JavaScript (only supported in MW 1.42+). Please change the `target` field in `webpack.config.js` and `tsconfig.json` files from `es6` to `es5`.
 
 ## Need help?
