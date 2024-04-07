@@ -87,7 +87,7 @@ Twinkle-core uses translatewiki.net for message translations (https://translatew
 Firstly, you'll want to make sure your editor is properly configured to work with TypeScript. For example, you may need to install a plugin (such as atom-typescript if you use atom editor), in order to fully take advantage of TypeScript. If you use VS Code, TypeScript support is built-in, so no extensions are required.
 
 Commands:
-- `npm start` - this creates a quick build of the project which you can test by loading `mw.loader.load('http://localhost:5500/dev-loader.js');` from your on-wiki common.js page (or from the browser console). 
+- `npm start` - this creates a quick build of the project which you can test by loading `mw.loader.load('http://localhost:5500');` from your on-wiki common.js page (or from the browser console). 
 - `grunt build` - this creates a minified single-file build that you copy over to the wiki (see Deployment below).
 
 Use your [browser console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console/Console_messages) to look out for any JavaScript errors (usually opened via Ctrl+Shift+J or Cmd+Option+J or F12).
