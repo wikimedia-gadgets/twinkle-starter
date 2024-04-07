@@ -1,13 +1,11 @@
 {
+	/* Visit https://aka.ms/tsconfig.json to read more about this file */
 	"compilerOptions": {
-		/* Visit https://aka.ms/tsconfig.json to read more about this file */
-		"target": "ES5",
-		"module": "ES2020",
+		"target": "es6",
+		"module": "es2020",
 		"lib": [
 			"dom",
-			"es5",
-			"es2015.collection"
-			// Only Map and Set from this are supported in IE 11.
+			"es6",
 		],
 		"outDir": "./build",
 		"sourceMap": true,

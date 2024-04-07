@@ -243,6 +243,10 @@ Do check regularly for new twinkle-core releases, since dependabot wouldn't be a
 
 </details>
 
+## Troubleshooting
+- Getting `JavaScript parse error (scripts need to be valid ES5)` after deploying the output of `grunt build`:
+  - This is because your wiki doesn't support ES6 for JavaScript (only supported in MW 1.42+). Please change the `target` field in `webpack.config.js` and `tsconfig.json` files from `es6` to `es5`.
+
 ## Need help?
 
 Channels for reporting issues or seeking help include:
